@@ -62,7 +62,7 @@ activities = [
     {
         "id": 7,
         "name": "Photography",
-        "category": "Artistic",
+        "category": "Artistic", # fake comment
         "participants": []
     },
     {
