@@ -20,26 +20,83 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
 
 # In-memory activity database
-activities = {
-    "Chess Club": {
-        "description": "Learn strategies and compete in chess tournaments",
-        "schedule": "Fridays, 3:30 PM - 5:00 PM",
-        "max_participants": 12,
-        "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
+activities = [
+    {
+        "id": 1,
+        "name": "Soccer",
+        "category": "Sports",
+        "participants": []
     },
-    "Programming Class": {
-        "description": "Learn programming fundamentals and build software projects",
-        "schedule": "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
-        "max_participants": 20,
-        "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
+    {
+        "id": 2,
+        "name": "Basketball",
+        "category": "Sports",
+        "participants": []
     },
-    "Gym Class": {
-        "description": "Physical education and sports activities",
-        "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
-        "max_participants": 30,
-        "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    # Added sports activities
+    {
+        "id": 3,
+        "name": "Tennis",
+        "category": "Sports",
+        "participants": []
+    },
+    {
+        "id": 4,
+        "name": "Swimming",
+        "category": "Sports",
+        "participants": []
+    },
+    {
+        "id": 5,
+        "name": "Painting",
+        "category": "Artistic",
+        "participants": []
+    },
+    {
+        "id": 6,
+        "name": "Drama Club",
+        "category": "Artistic",
+        "participants": []
+    },
+    # Added artistic activities
+    {
+        "id": 7,
+        "name": "Photography",
+        "category": "Artistic",
+        "participants": []
+    },
+    {
+        "id": 8,
+        "name": "Choir",
+        "category": "Artistic",
+        "participants": []
+    },
+    {
+        "id": 9,
+        "name": "Chess Club",
+        "category": "Intellectual",
+        "participants": []
+    },
+    {
+        "id": 10,
+        "name": "Mathletes",
+        "category": "Intellectual",
+        "participants": []
+    },
+    # Added intellectual activities
+    {
+        "id": 11,
+        "name": "Debate Team",
+        "category": "Intellectual",
+        "participants": []
+    },
+    {
+        "id": 12,
+        "name": "Science Olympiad",
+        "category": "Intellectual",
+        "participants": []
     }
-}
+]
 
 
 @app.get("/")
@@ -61,6 +118,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Check if student is already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student is already signed up")
 
     # Add student
     activity["participants"].append(email)
