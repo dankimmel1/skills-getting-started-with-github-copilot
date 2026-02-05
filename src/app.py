@@ -19,10 +19,6 @@ current_dir = Path(__file__).parent
 app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
 
-@app.get("/activities4")
-def get_activities4():
-    return activities4
-
 # In-memory activity database
 activities = [
     {
@@ -102,9 +98,6 @@ activities = [
     }
 ]
 
-@app.get("/activities3")
-def get_activities3():
-    return activities3
 
 @app.get("/")
 def root():
@@ -114,11 +107,6 @@ def root():
 @app.get("/activities")
 def get_activities():
     return activities
-
-
-@app.get("/activities2")
-def get_activities2():
-    return activities2
 
 @app.post("/activities/{activity_name}/signup")
 def signup_for_activity(activity_name: str, email: str):
@@ -137,7 +125,3 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
-
-@app.get("/activities1")
-def get_activities1():
-    return activities1
